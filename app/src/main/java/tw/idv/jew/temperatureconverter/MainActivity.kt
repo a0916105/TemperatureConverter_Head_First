@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,6 +41,17 @@ fun Header(image: Int, description: String) {
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun EnterTemperature(temperature: String, changed: (String) -> Unit) {
+    TextField(
+        value = temperature,
+        label = { Text("Enter a temperature in Celsius") }, //讓TextField的label使用這段文字
+        onValueChange = changed,    //當用戶更改TextField時，執行指定的lambda
+        modifier = Modifier.fillMaxWidth()
+    )
+}
+
 @Composable
 fun ConvertButton(clicked: () -> Unit) {
     Button(onClick = clicked) {
@@ -60,7 +73,7 @@ fun MainActivityContent() {
 
     Column {
         Header(R.drawable.sunrise, "sunrise image")
-        ConvertButton { celsius.value = 20 }    //讓按下時更改celsius
+        ConvertButton { celsius.value = 20 }
         TemperatureText(celsius.value)  //Compose只會在接收引數改變時重繪
     }
 }
