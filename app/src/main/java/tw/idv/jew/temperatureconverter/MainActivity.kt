@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -53,9 +55,13 @@ fun TemperatureText(celsius: Int) { //顯示攝氏轉換成華氏的文字
 //這個註解會將它轉換成composable函式
 @Composable
 fun MainActivityContent() {
+    //使用remeber將物件存入composable的記憶體
+    val celsius = remember { mutableStateOf(0) }
+
     Column {
         Header(R.drawable.sunrise, "sunrise image")
-        TemperatureText(0)
+        ConvertButton { celsius.value = 20 }    //讓按下時更改celsius
+        TemperatureText(celsius.value)  //Compose只會在接收引數改變時重繪
     }
 }
 
