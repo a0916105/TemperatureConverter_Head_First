@@ -70,10 +70,16 @@ fun TemperatureText(celsius: Int) { //顯示攝氏轉換成華氏的文字
 fun MainActivityContent() {
     //使用remeber將物件存入composable的記憶體
     val celsius = remember { mutableStateOf(0) }
+    val newCelsius = remember { mutableStateOf("") }    //儲存用戶輸入的溫度
 
     Column {
         Header(R.drawable.sunrise, "sunrise image")
-        ConvertButton { celsius.value = 20 }
+        EnterTemperature(newCelsius.value) { newCelsius.value = it }    //當用戶輸入更改時，會執行更新（Compose會在接收引數改變時更新）
+        ConvertButton {
+            newCelsius.value.toIntOrNull()?.let {   //當用戶輸入有效的Int時，執行
+                celsius.value = it  //當值更新時，會重組TemperatureText（Compose會在接收引數改變時更新）
+            }
+        }
         TemperatureText(celsius.value)  //Compose只會在接收引數改變時重繪
     }
 }
