@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -34,6 +35,13 @@ fun Header(image: Int, description: String) {
             .fillMaxWidth(),
         contentScale = ContentScale.Crop    //自動縮放圖像
     )
+}
+
+@Composable
+fun ConvertButton(clicked: () -> Unit) {
+    Button(onClick = clicked) {
+        Text("Convert")
+    }
 }
 
 @Composable
