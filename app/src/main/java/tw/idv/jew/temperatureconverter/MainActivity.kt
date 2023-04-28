@@ -22,17 +22,22 @@ class MainActivity : ComponentActivity() {  //使用Compose需改繼承Component
     }
 }
 
-//這個註解會將它轉換成composable函式
 @Composable
-fun MainActivityContent() {
+fun Header(image: Int, description: String) {
     Image(  //使用Image composable
-        painter = painterResource(R.drawable.sunrise),  //指定圖像
-        contentDescription = "sunrise image",    //圖像的敘述
+        painter = painterResource(image),  //指定圖像
+        contentDescription = description,    //圖像的敘述
         modifier = Modifier //可用來加入額外類別
             .height(180.dp)
             .fillMaxWidth(),
         contentScale = ContentScale.Crop    //自動縮放圖像
     )
+}
+
+//這個註解會將它轉換成composable函式
+@Composable
+fun MainActivityContent() {
+    Header(R.drawable.sunrise, "sunrise image")
 }
 
 //預覽（只有沒有引數的composable函式）：只有加入此註解的片段程式能使用Split或Design預覽
