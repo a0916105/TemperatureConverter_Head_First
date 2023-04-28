@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -34,10 +36,19 @@ fun Header(image: Int, description: String) {
     )
 }
 
+@Composable
+fun TemperatureText(celsius: Int) { //顯示攝氏轉換成華氏的文字
+    val fahrenheit = (celsius.toDouble()*9/5)+32
+    Text("$celsius Celsius is $fahrenheit Fahrenheit")
+}
+
 //這個註解會將它轉換成composable函式
 @Composable
 fun MainActivityContent() {
-    Header(R.drawable.sunrise, "sunrise image")
+    Column {
+        Header(R.drawable.sunrise, "sunrise image")
+        TemperatureText(0)
+    }
 }
 
 //預覽（只有沒有引數的composable函式）：只有加入此註解的片段程式能使用Split或Design預覽
