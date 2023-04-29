@@ -93,5 +93,9 @@ fun MainActivityContent() {
 @Preview(showBackground = true) //預設背景是透明的，所以使用showBackground = true覆寫設定
 @Composable
 fun PreviewMainActivity() { //要及時預覽的部分（Preview+類別名稱）程式碼因該要相同
-    MainActivityContent()
+    MaterialTheme {
+        Surface {
+            MainActivityContent()
+        }
+    }
 }
