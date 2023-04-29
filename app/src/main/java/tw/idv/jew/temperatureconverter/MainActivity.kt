@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -72,7 +73,7 @@ fun MainActivityContent() {
     val celsius = remember { mutableStateOf(0) }
     val newCelsius = remember { mutableStateOf("") }    //儲存用戶輸入的溫度
 
-    Column {
+    Column(modifier = Modifier.padding(16.dp)) {    //加上邊距
         Header(R.drawable.sunrise, "sunrise image")
         EnterTemperature(newCelsius.value) { newCelsius.value = it }    //當用戶輸入更改時，會執行更新（Compose會在接收引數改變時更新）
         ConvertButton {
