@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -74,13 +76,18 @@ fun MainActivityContent() {
     val celsius = remember { mutableStateOf(0) }
     val newCelsius = remember { mutableStateOf("") }    //儲存用戶輸入的溫度
 
-    Column(modifier = Modifier.padding(16.dp).fillMaxWidth(),   //加上邊距，並填滿父項寬度上限
-        horizontalAlignment = Alignment.CenterHorizontally) {    //水平置中所以有東西
+    Column(modifier = Modifier
+        .padding(16.dp)
+        .fillMaxWidth())   //加上邊距，並填滿父項寬度上限
+    {
         Header(R.drawable.sunrise, "sunrise image")
         EnterTemperature(newCelsius.value) { newCelsius.value = it }    //當用戶輸入更改時，會執行更新（Compose會在接收引數改變時更新）
-        ConvertButton {
-            newCelsius.value.toIntOrNull()?.let {   //當用戶輸入有效的Int時，執行
-                celsius.value = it  //當值更新時，會重組TemperatureText（Compose會在接收引數改變時更新）
+        Row(modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center) {   //只有Row內的才會水平置中
+            ConvertButton {
+                newCelsius.value.toIntOrNull()?.let {   //當用戶輸入有效的Int時，執行
+                    celsius.value = it  //當值更新時，會重組TemperatureText（Compose會在接收引數改變時更新）
+                }
             }
         }
         TemperatureText(celsius.value)  //Compose只會在接收引數改變時重繪
