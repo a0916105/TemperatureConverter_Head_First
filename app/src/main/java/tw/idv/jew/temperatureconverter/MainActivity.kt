@@ -15,6 +15,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -73,7 +74,8 @@ fun MainActivityContent() {
     val celsius = remember { mutableStateOf(0) }
     val newCelsius = remember { mutableStateOf("") }    //儲存用戶輸入的溫度
 
-    Column(modifier = Modifier.padding(16.dp)) {    //加上邊距
+    Column(modifier = Modifier.padding(16.dp).fillMaxWidth(),   //加上邊距，並填滿父項寬度上限
+        horizontalAlignment = Alignment.CenterHorizontally) {    //水平置中所以有東西
         Header(R.drawable.sunrise, "sunrise image")
         EnterTemperature(newCelsius.value) { newCelsius.value = it }    //當用戶輸入更改時，會執行更新（Compose會在接收引數改變時更新）
         ConvertButton {
