@@ -73,10 +73,10 @@ fun MainActivityContent() {
 
     Column(modifier = Modifier
         .padding(16.dp)
-        .fillMaxWidth())   //加上邊距，並填滿父項寬度上限
-    {
+        .fillMaxWidth()) {  //加上邊距，並填滿父項寬度上限
         Header(R.drawable.sunrise, "sunrise image")
         EnterTemperature(newCelsius.value) { newCelsius.value = it }    //當用戶輸入更改時，會執行更新（Compose會在接收引數改變時更新）
+        Spacer(Modifier.height(16.dp))
         Row(modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center) {   //只有Row內的才會水平置中
             ConvertButton {
@@ -85,6 +85,7 @@ fun MainActivityContent() {
                 }
             }
         }
+        Spacer(Modifier.height(16.dp))
         TemperatureText(celsius.value)  //Compose只會在接收引數改變時重繪
     }
 }
